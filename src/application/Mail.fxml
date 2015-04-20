@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MailExampleController">
+   <children>
+      <HBox prefHeight="73.0" prefWidth="1024.0" style="-fx-background-color: #E87E04;">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../komodo_white.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="title" text="KOMODO MAIL" textFill="WHITE">
+               <font>
+                  <Font name="Segoe WP Semibold" size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="15.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="205.0" style="-fx-background-color: #E87E04; -fx-alignment: right; -fx-mark-color: #fff;" text="INBOX" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+            <MenuItem mnemonicParsing="false" onAction="#composeButtonAction" style="-fx-alignment: right;" text="COMPOSE" />
+          <MenuItem mnemonicParsing="false" onAction="#inboxButtonAction" style="-fx-alignment: right;" text="INBOX" />
+          <MenuItem mnemonicParsing="false" onAction="#sentButtonAction" style="-fx-alignment: right;" text="SENT" />
+            <MenuItem mnemonicParsing="false" onAction="#draftButtonAction" style="-fx-alignment: right;" text="DRAFT" />
+            <MenuItem mnemonicParsing="false" onAction="#spamButtonAction" style="-fx-alignment: right;" text="SPAM" />
+            <MenuItem mnemonicParsing="false" onAction="#trashButtonAction" style="-fx-alignment: right;" text="TRASH" />
+            <MenuItem mnemonicParsing="false" onAction="#exitButtonAction" style="-fx-alignment: right;" text="EXIT" />
+        </items>
+         <font>
+            <Font name="Segoe UI Semibold" size="22.0" />
+         </font>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </MenuButton>
+      <ListView fx:id="listView" layoutY="93.0" onMouseClicked="#mailListClickAction" prefHeight="640.0" prefWidth="352.0" style="-fx-background-color: #ECF0F1;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+      <VBox fx:id="mailContent" layoutX="307.0" layoutY="99.0" prefHeight="640.0" prefWidth="672.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="693.0" style="-fx-background-color: #cfd8dc;">
+               <children>
+                  <VBox prefHeight="52.0" prefWidth="442.0">
+                     <children>
+                        <Label fx:id="emailSubject" prefHeight="35.0" prefWidth="495.0" text="Select Mail From List to View">
+                           <font>
+                              <Font name="Segoe UI Light" size="24.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="emailSR">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="emailDate">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#forwardButtonAction" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #fff; -fx-background-radius: 0 0 0 0;" text="Forward" visible="false">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="2.0" top="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="replyButton" mnemonicParsing="false" onAction="#replyButtonAction" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #fff; -fx-background-radius: 0 0 0 0;" text="Reply" visible="false">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="2.0" right="2.0" top="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="decryptButton" layoutX="593.0" layoutY="35.0" mnemonicParsing="false" onAction="#decryptButtonAction" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #fff; -fx-background-radius: 0 0 0 0;" text="Decrypt" visible="false">
+                     <HBox.margin>
+                        <Insets left="2.0" right="2.0" top="15.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </HBox>
+            <WebView fx:id="emailWebView" prefHeight="537.0" prefWidth="674.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </WebView>
+         </children>
+      </VBox>
+      <VBox fx:id="mailCompose" layoutX="14.0" layoutY="113.0" prefHeight="593.0" prefWidth="994.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <children>
+            <TextField fx:id="recipientField" promptText="Recipient" style="-fx-border-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;">
+               <font>
+                  <Font name="Segoe UI Light" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="subjectField" promptText="Subject" style="-fx-border-radius: 0 0 0 0; -fx-background-radius: 0 0 0 0;">
+               <font>
+                  <Font name="Segoe UI Light" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextArea fx:id="contentField" prefHeight="276.0" prefWidth="874.0" promptText="Content" style="-fx-background-radius: 0 0 0 0; -fx-border-radius: 0 0 0 0;">
+               <font>
+                  <Font name="Segoe UI Light" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox prefHeight="26.0" prefWidth="544.0">
+               <children>
+                  <RadioButton fx:id="useEncryptionRadio" mnemonicParsing="false" text="Use Encryption">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin></RadioButton>
+                  <RadioButton fx:id="useSignatureRadio" mnemonicParsing="false" text="Use Signature" textAlignment="RIGHT">
+                     <font>
+                        <Font name="Segoe UI Light" size="14.0" />
+                     </font></RadioButton>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="500.0">
+                     <children>
+                        <Label text="No signature file selected">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #FFF; -fx-border-width: 1 1 1 1; -fx-border-color: #E87E04;" text="Select">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" left="15.0" right="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="47.0" prefWidth="874.0">
+               <children>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #FFF; -fx-border-width: 1 1 1 1; -fx-border-color: #E87E04;" text="Attach">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="22.0" prefWidth="95.0" style="-fx-background-color: #E87E04; -fx-background-radius: 0 0 0 0; -fx-border-width: 1 1 1 1; -fx-border-color: #E87E04;" text="Send" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="100.0" right="100.0" />
+         </padding>
+      </VBox>
+      <GridPane style="-fx-background-color: #E87E04;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Copyright 2015" textFill="WHITE">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="currentMailLabel" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="564.0" text="Current Email : " textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
